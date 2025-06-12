@@ -1,0 +1,95 @@
+<ion-row (click)="itemSelected()" class="ion-padding-end" [routerLink]="routerLink1" [routerLinkActive]="'active'"
+         (isActiveChange)="isActiveChange($event)">
+
+
+  <!-- LOGO HEIM -->
+
+  <ion-col size="auto">
+    <div *ngIf="item" class="logo"
+         [innerHTML]="item.homeTenantLogo | deleteBackslashes | removeSVGProperties | safe: 'html'">
+    </div>
+  </ion-col>
+
+  <ion-col>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <p style="margin: 4px 0 0 0; font-size: 10px; font-family: var(--headline-font)">{{ item.plannedKickoffTime | date: 'dd.MM.YYYY HH:mm'}}</p>
+      </ion-col>
+
+    </ion-row>
+
+
+    <ion-row>
+      <!-- HEIM -->
+      <ion-col class="ion-padding-end">
+
+        <ion-row class="ion-align-items-center">
+
+          <ion-col class="ion-text-end">
+            <p [ngClass]="isSelected ? 'Title' : 'Label'">{{ item.homeThreeLetterCode }}</p>
+          </ion-col>
+        </ion-row>
+
+
+
+
+        <ion-row class="ion-justify-content-end">
+
+
+          <ion-col class="ion-text-end">
+
+            <ion-badge *ngIf="item?.homeFieldsPartialFilledCount !== null && item?.homeFieldsPartialFilledCount !== 0"
+                       class="M-L8 SOPI-Badge PartialOk">{{ item?.homeFieldsPartialFilledCount }}
+              <ion-icon name="checkmark"></ion-icon>
+            </ion-badge>
+            <ion-badge *ngIf="item?.homeFieldsNotFilledCount !== null && item?.homeFieldsNotFilledCount !== 0"
+                       class="M-L8 SOPI-Badge NotOk">{{ item?.homeFieldsNotFilledCount }}
+              <ion-icon name="flash"></ion-icon>
+            </ion-badge>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-col>
+
+      <!-- GAST -->
+      <ion-col class="ion-padding-start">
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p [ngClass]="isSelected ? 'Title' : 'Label'">{{ item.guestThreeLetterCode }}</p>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-row class="ion-justify-content-start">
+          <ion-col class="ion-align-self-center">
+            <!--<ion-badge *ngIf="item?.guestFieldsFilledCount !== null && item?.guestFieldsFilledCount !== 0"
+                       class="SOPI-Badge Ok">{{ item?.guestFieldsFilledCount }}
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-badge>-->
+            <ion-badge *ngIf="item?.guestFieldsNotFilledCount !== null && item?.guestFieldsNotFilledCount !== 0"
+                       class="SOPI-Badge NotOk">{{ item?.guestFieldsNotFilledCount }}
+              <ion-icon name="flash"></ion-icon>
+            </ion-badge>
+            <ion-badge *ngIf="item?.guestFieldsPartialFilledCount !== null && item?.guestFieldsPartialFilledCount !== 0"
+                       class="SOPI-Badge PartialOk">{{ item?.guestFieldsPartialFilledCount }}
+              <ion-icon name="checkmark"></ion-icon>
+            </ion-badge>
+
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+
+
+
+  <!-- LOGO GAST -->
+  <ion-col size="auto">
+    <div *ngIf="item" class="logo"
+         [innerHTML]="item.guestTenantLogo | deleteBackslashes | removeSVGProperties | safe: 'html'">
+    </div>
+  </ion-col>
+
+</ion-row>
